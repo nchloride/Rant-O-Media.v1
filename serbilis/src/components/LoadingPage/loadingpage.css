@@ -1,0 +1,58 @@
+body {
+  background-color: #3b3b3b;
+}
+.spinner {
+  width: 300px;
+  height: 100px;
+  /* border: 20px solid black; */
+  /* border-top: 20px solid transparent; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #3b3b3b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center;
+  /* animation: rotatation 1s infinite; */
+}
+.dot {
+  margin: 15px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+.dot:nth-child(1) {
+  background-color: black;
+  animation: scaling 1s infinite ease;
+}
+.dot:nth-child(2) {
+  background-color: blue;
+  animation: scaling 1s infinite ease;
+  animation-delay: 0.5s;
+}
+.dot:nth-child(3) {
+  background-color: red;
+  animation: scaling 1s infinite ease;
+  animation-delay: 0.8s;
+}
+@keyframes rotatation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes scaling {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

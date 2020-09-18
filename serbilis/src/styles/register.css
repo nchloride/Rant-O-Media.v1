@@ -1,0 +1,60 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 600px;
+  background-color: grey;
+  justify-content: center;
+  justify-content: space-evenly;
+}
+input[type="text"]:focus {
+  outline: none;
+}
+input {
+  margin: 2px;
+}
+.register-form-headers {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.register-form-headers > button {
+  height: 20px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+.register-form-inputs {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  justify-content: space-evenly;
+}
+.register-form-inputs > input,
+select {
+  height: 50px;
+  border-radius: 10px;
+}
+.register-form-headers > div {
+  width: 300px;
+}
+.register-form-headers > div > h1 {
+  color: coral;
+  font-size: 50px;
+}
+.register-form-userpass {
+  display: flex;
+}
+.register-form-userpass > input {
+  width: 90%;
+  height: 50px;
+  border-radius: 10px;
+}
+input[type="submit"] {
+  background-color: rgb(0, 233, 0);
+  height: 50px;
+  border-radius: 10px;
+  border: transparent;
+}

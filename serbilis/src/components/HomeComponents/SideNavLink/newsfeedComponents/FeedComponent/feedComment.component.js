@@ -16,6 +16,7 @@ const FeedComment = ({ userInfo, postID }) => {
       body: JSON.stringify({
         postid: postID,
         username: userInformation?.fullname,
+        commentUsernameID: userInformation?.username,
         comment: data.comment,
       }),
       headers: { "Content-Type": "application/json" },

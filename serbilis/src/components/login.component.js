@@ -28,9 +28,7 @@ export const LoginForm = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [login, setLogin] = useState();
   const [loading, setLoading] = useState(false);
-  // const dispatch = useDispatch();
-  // const login1 = useSelector((state) => state.isLogin);
-  // const { userInformation, isLoading } = login1;
+
   const history = useHistory();
   useEffect(() => {
     Modal.setAppElement("body");
@@ -38,7 +36,6 @@ export const LoginForm = (props) => {
       setLoading(!loading);
       const userData = await fetch("/islogin");
       const data = await userData.json();
-      // dispatch(isLogin());
 
       if (data.data !== "No User Found") {
         setLoading(!loading);

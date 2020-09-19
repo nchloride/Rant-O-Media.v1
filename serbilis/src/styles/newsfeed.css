@@ -130,12 +130,25 @@
   padding: 4px;
   margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+}
+.comment-details {
+  display: block;
 }
 .comment-section-comment {
   display: block;
   word-break: break-all;
   font-size: 12px;
+}
+.comment-section > button {
+  background-color: transparent;
+  border: none;
+
+  outline: none;
+}
+.comment-section > button:active {
+  transition: 0.1s;
+  background-color: rgb(252, 53, 53);
 }
 .comment-section-user {
   font-size: 10px;

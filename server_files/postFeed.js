@@ -54,8 +54,8 @@ app.post("/getComment", (req, res) => {
 });
 
 app.post("/insertComment", (req, res) => {
-  const { username, postid, comment } = req.body;
-  const insertQuery = `insert into postcomment (postID,username,comment) values('${postid}','${username}','${comment}')`;
+  const { username, postid, comment, commentUsernameID } = req.body;
+  const insertQuery = `insert into postcomment (postID,username,comment,commentUsernameID) values('${postid}','${username}','${comment}','${commentUsernameID}')`;
   connection.getConnection((err, tempCon) => {
     if (err) {
       tempCon.release();
@@ -72,6 +72,26 @@ app.post("/insertComment", (req, res) => {
     }
   });
 });
+app.post("/deleteComment", (req, res) => {
+  const { commentID } = req.body;
+  const deleteCommentQuery = `delete from postcomment where commentID = '${commentID}' `;
+
+  connection.getConnection((err, tempCon) => {
+    if (err) {
+      res.send(err);
+      tempCon.release();
+    } else {
+      tempCon.query(deleteCommentQuery, (error, result) => {
+        if (error) res.send(error);
+        else {
+          res.send({ message: "comment deleted" });
+        }
+      });
+      tempCon.release();
+    }
+  });
+});
+
 app.get("/selectPosts", (req, res) => {
   const selectAll = `select newsfeedpost.*,userlogin.fullname from newsfeedpost,userlogin where newsfeedpost.postUsername = userlogin.username ORDER by postID DESC`;
   connection.query(selectAll, (err, results) => {

@@ -9,7 +9,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { useHistory, NavLink } from "react-router-dom";
 import { User } from ".././UserAuth";
 export default function SideNav(props) {
-  let history = useHistory();
+  const history = useHistory();
   const userInformation = useContext(User);
   const logOut = async () => {
     await fetch("/logout").then((res) => {
@@ -30,12 +30,13 @@ export default function SideNav(props) {
         localStorage.getItem("secretkey") !== null
       ) {
         localStorage.setItem("secretkey", userInformation?.password);
+        history.push("/home");
       } else {
         history.push("/");
       }
     };
     getCredentials();
-  }, [userInformation]);
+  }, []);
 
   return (
     <div className="sideNav">

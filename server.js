@@ -41,7 +41,7 @@ app.use(
 );
 app.use(cookieParser("secretcode"));
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.use("/getUserPosts", profileInfo);
 app.use("/postFeed", posting);
 app.use("/register", userRegister);

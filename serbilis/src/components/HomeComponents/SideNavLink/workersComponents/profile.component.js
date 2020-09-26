@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import ResultComponent from "./result.component";
 import { ProfileView } from "../../../ViewProfile";
 import { CommentRefresher, Refresher } from "../../CommentRefresher/";
+import LoadingScreen from "../../../LoadingScreen";
 import FeedPost from "../newsfeedComponents/FeedComponent/feedPost.component";
 const ProfileComponent = () => {
   const [viewProfile] = useContext(ProfileView);
   const [userPosts, setUserPosts] = useState();
-
+  const [loading, setLoading] = useState();
   useEffect(() => {
     const getPosts = async () => {
+      setLoading(true);
       if (viewProfile.profileInfo.username !== undefined)
         await fetch("/getUserPosts/profilePosts", {
           mode: "cors",
@@ -19,6 +21,7 @@ const ProfileComponent = () => {
           .then((result) => result.json())
           .then((data) => {
             setUserPosts(data);
+            setLoading(false);
           })
           .catch((err) => console.log(err));
     };
@@ -31,8 +34,17 @@ const ProfileComponent = () => {
         functionClass={"result-profile"}
       />
       <Refresher>
-        {userPosts &&
-          userPosts.map((post, id) => <FeedPost post={post} key={id} />)}
+        {/* {userPosts ? (
+          userPosts.map((post, id) => <FeedPost post={post} key={id} />)
+        ) : (
+          <LoadingScreen />
+        )} */}
+        {loading ? (
+          <LoadingScreen />
+        ) : (
+          userPosts &&
+          userPosts.map((post, id) => <FeedPost post={post} key={id} />)
+        )}
       </Refresher>
     </div>
   );

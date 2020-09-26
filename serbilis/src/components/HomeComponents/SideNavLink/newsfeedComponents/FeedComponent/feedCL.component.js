@@ -30,9 +30,6 @@ const FeedCL = ({ comments, postID, postLikes, fullname }) => {
   const [postlikes, setPostLikes] = useState(JSON.parse(postLikes));
   const commentClicked = async () => {
     setCommentOpen(!commentOpen);
-    const resp = await fetch("/islogin");
-    const data = await resp.json();
-    setUserInfo(data);
   };
   const likeCounter = (likes) => {
     let newCount = likes;

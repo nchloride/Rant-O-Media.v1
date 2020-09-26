@@ -7,6 +7,7 @@ const FeedPost = ({ post }) => {
   const [refresh, setRefresh] = useContext(CommentRefresher);
 
   useEffect(() => {
+    let mounted = true;
     const getComment = async () => {
       // const commment = await fetch("/postFeed/getComment", {
       //   mode: "cors",
@@ -23,9 +24,12 @@ const FeedPost = ({ post }) => {
         body: JSON.stringify({ postID: post.postID }),
       })
         .then((res) => res.json())
-        .then((data) => setComments(data));
+        .then((data) => {
+          if (mounted) setComments(data);
+        });
     };
     getComment();
+    return () => (mounted = false);
   }, [!refresh]);
   return (
     <div className="feed-post">

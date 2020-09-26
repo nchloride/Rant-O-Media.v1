@@ -1,0 +1,69 @@
+:root {
+  --main-background-color: #4d4d4d;
+  --secondary-color: #303030;
+}
+
+.messages-tab {
+  margin-left: 20%;
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+.conversation-tab {
+  padding: 10px;
+  width: 60vw;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+.conversation-tab--chat-display {
+  background-color: whitesmoke;
+  width: 100%;
+  height: 60vh;
+  font-size: 12px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.conversation-tab--chat-display > .sender {
+  text-align: right;
+  background-color: rgb(57, 57, 255);
+  width: 100%;
+
+  word-break: break-all;
+  border-radius: 10px;
+}
+.conversation-tab--chat-display > .receiver {
+  text-align: left;
+}
+.conversation-tab--chat-inputs {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.conversation-tab--chat-inputs > input {
+  width: 35vw;
+}
+
+.chat-box-tab {
+  height: 100vh;
+  display: flex;
+  width: 20vw;
+  flex-direction: column;
+  background-color: white;
+}
+.chat-box-chat-icon {
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: var(--main-background-color);
+  color: white;
+}
+.chat-box-chat-icon:hover {
+  transition: 0.5s;
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}

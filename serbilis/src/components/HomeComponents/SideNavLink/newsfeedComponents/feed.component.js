@@ -5,7 +5,7 @@ import { CommentRefresher, Refresher } from "../../CommentRefresher/";
 import { User } from "../../../UserAuth";
 
 import LoadingScreen from "../../../LoadingScreen";
-const followingListPost = async (list, set, loading) => {
+const followingListPost = async (list, set, loading, mounted) => {
   if (list !== null) {
     loading(true);
     list.map(
@@ -20,10 +20,11 @@ const followingListPost = async (list, set, loading) => {
         })
           .then((result) => result.json())
           .then((data) => {
-            set((prevData) => [
-              ...prevData,
-              ...data.map((singleData) => singleData),
-            ]);
+            if (mounted)
+              set((prevData) => [
+                ...prevData,
+                ...data.map((singleData) => singleData),
+              ]);
             loading(false);
           })
           .catch((err) => console.log(err))
@@ -47,14 +48,17 @@ const FeedComponent = (props) => {
       .catch((err) => console.log(err));
   };
   useEffect(() => {
+    let mounted = true;
     if (typeof userInformation !== "undefined") {
       console.log(userInformation);
       followingListPost(
         JSON.parse(userInformation.following),
         setFollowingList,
-        setLoading
+        setLoading,
+        mounted
       );
     }
+    return () => (mounted = false);
   }, [userInformation, props.refresh]);
 
   // useEffect(() => {
@@ -67,7 +71,6 @@ const FeedComponent = (props) => {
         {loading ? (
           <LoadingScreen />
         ) : (
-          followingList &&
           followingList.map((post, id) => <FeedPost post={post} key={id} />)
           // followingList
           //   .sort(

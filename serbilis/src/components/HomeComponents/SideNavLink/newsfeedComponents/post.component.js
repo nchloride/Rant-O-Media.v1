@@ -11,9 +11,6 @@ function PostCommponent(props) {
   const [charLimit, setLimit] = useState(false);
   const [userInfo, setUserInfo] = useState();
   const { refresh, enableRefresh } = props;
-  useEffect(() => {
-    userAccount();
-  }, []);
 
   const formSubmit = async (data) => {
     await fetch(`/postFeed/addPost`, {
@@ -38,12 +35,6 @@ function PostCommponent(props) {
         props.history.push("/");
         setMessage("");
       });
-  };
-
-  const userAccount = async () => {
-    const resp = await fetch("/islogin");
-    const data = await resp.json();
-    setUserInfo(data.data[0]);
   };
 
   const dateNow = () => {
@@ -75,6 +66,18 @@ function PostCommponent(props) {
       setLimit(false);
     }
   };
+  useEffect(() => {
+    let mounted = true;
+    const userAccount = async () => {
+      const resp = await fetch("/islogin");
+      const data = await resp.json();
+      if (mounted) {
+        setUserInfo(data.data[0]);
+      }
+    };
+    userAccount();
+    return () => (mounted = false);
+  }, []);
   return !userInfo ? (
     <LoadingScreen />
   ) : (

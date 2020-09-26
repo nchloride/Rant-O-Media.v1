@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import SideNav from "./HomeComponents/homeSideNav.component";
 import "../styles/home.css";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NewsFeed from "./HomeComponents/SideNavLink/newsfeed.component";
 import WorkersComponent from "./HomeComponents/SideNavLink/workers.component";
 import MessageComponent from "./HomeComponents/SideNavLink/messages.component";
@@ -11,9 +11,22 @@ import { ProfileView } from "./ViewProfile";
 import ProfileComponent from "./HomeComponents/SideNavLink/workersComponents/profile.component";
 export default function Home(props) {
   const [viewProfile] = useContext(ProfileView);
+
+  useEffect(() => {
+    const getCredentials = async () => {
+      const userData = await fetch("/islogin");
+      const data = await userData.json();
+      if (data.data !== "No User Found") {
+        props.history.push("/home");
+      } else {
+        props.history.push("/");
+      }
+    };
+    getCredentials();
+  }, []);
   return (
     <div className="homePage">
-      <BrowserRouter>
+      <Router>
         <UserAuth>
           <SideNav />
 
@@ -24,7 +37,7 @@ export default function Home(props) {
           </Switch>
           {viewProfile?.showProfile && <ProfileComponent />}
         </UserAuth>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }

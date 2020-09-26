@@ -8,6 +8,11 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { useHistory, NavLink } from "react-router-dom";
 import { User } from ".././UserAuth";
+import LoadingScreen from "../LoadingScreen";
+
+const TextLoadingTemplate = () => {
+  return <div className="bar"></div>;
+};
 export default function SideNav(props) {
   const history = useHistory();
   const userInformation = useContext(User);
@@ -36,7 +41,7 @@ export default function SideNav(props) {
       }
     };
     getCredentials();
-  }, []);
+  }, [userInformation]);
 
   return (
     <div className="sideNav">
@@ -45,7 +50,12 @@ export default function SideNav(props) {
           <WorkIcon />
           <h1>SERBILIS</h1>
         </div>
-        <h2>{userInformation && userInformation.fullname}</h2>
+
+        {userInformation ? (
+          <h2>{userInformation.fullname}</h2>
+        ) : (
+          <TextLoadingTemplate />
+        )}
       </div>
       <div>
         <ul className="navLinks">

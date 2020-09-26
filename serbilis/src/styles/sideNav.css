@@ -62,6 +62,24 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+.bar {
+  width: 70%;
+  height: 20px;
+  background-color: #202020;
+  border-radius: 10px;
+  animation: 2s glowing-opacity infinite;
+}
+@keyframes glowing-opacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 @media screen and (max-width: 720px) {
   .sideNav {
     width: 100%;
